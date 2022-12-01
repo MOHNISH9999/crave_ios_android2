@@ -9,41 +9,37 @@ class ReadUsers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference users=FirebaseFirestore.instance.collection("guest");
+    CollectionReference users = FirebaseFirestore.instance.collection("guest");
     return FutureBuilder<DocumentSnapshot>(
         future: users.doc(docid).get(),
         builder: ((context, snapshot) {
-          if(snapshot.connectionState==ConnectionState.done){
-            Map<String, dynamic> data=snapshot.data!.data() as Map<String, dynamic>;
+          if (snapshot.connectionState == ConnectionState.done) {
+            Map<String, dynamic> data =
+                snapshot.data!.data() as Map<String, dynamic>;
             return GestureDetector(
-              onTap:() {
-                Navigator.push(context, 
-                MaterialPageRoute(builder: (((context) =>Singleuserread(docid: docid) ))));
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (((context) =>
+                            Singleuserread(docid: docid)))));
               },
               child: Card(
                 shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                          //color: Colors.greenAccent,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      color: Color.fromARGB(255, 198, 243, 220),
+                  side: const BorderSide(
+                    //color: Colors.greenAccent,
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                color: Color.fromARGB(255, 198, 243, 241),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10,top: 5,bottom: 5),
+                  padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
                   child: Text(
-                      'name: ${data['name']}'
-                          
-                          +'\nEmail: ${data['email']}'
-                          
-                          +'\nCity: ${data['addressCity']}'
-                          ,
-                          style: TextStyle(
-                            fontSize: 20
-                          ),
-
-
-
+                    'name: ${data['name']}' +
+                        '\nEmail: ${data['email']}' +
+                        '\nCity: ${data['addressCity']}',
+                    style: TextStyle(fontSize: 20),
                   ),
                 ),
               ),
